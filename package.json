@@ -1,0 +1,23 @@
+{
+  "name": "justin1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tranhd98/justin1.git"
+  },
+  "keywords": [
+    "nodejs",
+    "spu"
+  ],
+  "author": "Hung Tran",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tranhd98/justin1/issues"
+  },
+  "homepage": "https://github.com/tranhd98/justin1#readme"
+}
