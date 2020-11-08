@@ -66,6 +66,6 @@ const server = http.createServer((request, response) => {
 });
 
 
-server.listen(port, hostname () => {
-    console.log(`Server running at: ${hostname}: ${port}/`);
+server.listen(port, () => {
+    console.log(`Server running at: ${port}/`);
 });
