@@ -1,13 +1,13 @@
 const http = require('http');
 const hostname = 'localhost';
-const port = 5000;
+const port = process.env.PORT || 5000;
 
-var friends = require("./friends.json"); // Once for all times
+var childs = require('./childs.json');
 
-const server = http.createServer((request, response) => {
-    response.statusCode = 200;
-    response.setHeader('Content-type', 'text/html');
-    response.write(
+const server = http.createServer((req, res) =>{
+    res.statusCode = 200;
+    res.setHeader('Content-type','text/html');
+    res.write(
         '<!DOCTYPE html> \n' +
         '<html lang="en"> \n' +
         '        <head> \n' +
@@ -24,48 +24,41 @@ const server = http.createServer((request, response) => {
         '       </head> \n' +
         '        <body> \n' +
         '               <div class="container" style="text-align: center"> \n' +
-        '               <h1>Another Example of Node</h1><br> \n'
+        '               <h1>Example 2 of Node</h1><br> \n'
+    );
 
-    );
-    var currentDate = new Date();
-    response.write(
-        '               <p>Current time is: ' + currentDate + '</p>'
-    );
-    response.write(
+    res.write(
         '               <table class="table table-bordered table-hover"> \n' +
         '                       <thead> \n' +
         '                               <tr> \n' +
+        '                                       <th scope="col">Gender</th> \n' +
         '                                       <th scope="col">First Name</th> \n' +
         '                                       <th scope="col">Last Name</th> \n' +
-        '                                       <th scope="col">Phone</th> \n' +
         '                                       <th scope="col">Phone</th> \n' +
         '                               </tr> \n' +
         '                       </thead> \n' +
         '                       <tbody> \n'
     );
-    for (var key in friends)
-        for (var f in friends[key])
-            response.write(
+    for(var key in childs){
+        for(var i in childs[key]){
+            res.write(
                 '                               <tr> \n' +
-                '                                       <td>' + friends[key][f]["firstName"] + '</td> \n' +
-                '                                       <td>' + friends[key][f]["lastName"] + '</td> \n' +
-                '                                       <td>' + friends[key][f]["phone"] + '</td> \n' +
-                '                                       <td>' + friends[key][f]["gender"] + '</td> \n' +
+                '                                       <td>' + key + '</td> \n' +
+                '                                       <td>' + childs[key][i]["firstName"] + '</td> \n' +
+                '                                       <td>' + childs[key][i]["lastname"] + '</td> \n' +
+                '                                       <td>' + childs[key][i]["phone"] + '</td> \n' +
                 '                               </tr> \n'
             );
-
-    response.write(
+        }
+    };
+    res.write(
         '                       </tbody> \n' +
-        '               </table> \n'
-    );
-    response.write(
+        '               </table> \n' +
         '       </body> \n' +
         '</html> \n'
     );
-    response.end();
+    res.end();
 });
-
-
-server.listen(port, () => {
-    console.log(`Server running at: ${port}/`);
+server.listen(port, () =>{
+    console.log(`listening at local ${port}`);
 });
