@@ -1,6 +1,6 @@
 const http = require('http');
 const hostname = 'localhost';
-const port = 3000;
+const port = process.env.PORT || 5000;
 
 var friends = require("./friends.json"); // Once for all times
 
@@ -65,6 +65,9 @@ const server = http.createServer((request, response) => {
     response.end();
 });
 
-server.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
+server.listen(port, (err) => {
+  if(err){
+    return console.log('Something went wrong', err);
+    }
+    console.log(`Server running at: ${port}/`);
 });
