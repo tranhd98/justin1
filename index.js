@@ -65,9 +65,6 @@ const server = http.createServer((request, response) => {
     response.end();
 });
 
-server.listen(port, (err) => {
-  if(err){
-    return console.log('Something went wrong', err);
-    }
+server.listen(port, () => {
     console.log(`Server running at: ${port}/`);
 });
