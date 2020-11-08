@@ -1,6 +1,6 @@
 const http = require('http');
 const hostname = 'localhost';
-const port = 3000;
+const port = Process.env.PORT || 3000;
 
 var friends = require("./friends.json"); // Once for all times
 
@@ -49,7 +49,7 @@ const server = http.createServer((request, response) => {
                 '                                       <td>' + friends[key][f]["firstName"] + '</td> \n' +
                 '                                       <td>' + friends[key][f]["lastName"] + '</td> \n' +
                 '                                       <td>' + friends[key][f]["phone"] + '</td> \n' +
-                '                                       <td>' + friends[key][f]["gemder"] + '</td> \n' +
+                '                                       <td>' + friends[key][f]["gender"] + '</td> \n' +
                 '                               </tr> \n'
             );
 
