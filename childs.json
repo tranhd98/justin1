@@ -1,0 +1,12 @@
+{
+    "boys":[
+        {"firstName":"George","lastname":"Kristoferson","phone":"2062062066"},
+        {"firstName":"Bill","lastname":"Madison","phone":"4254254255"},
+        {"firstName":"Peter","lastname":"Frampton","phone":"2125554545"},
+        {"firstName":"William","lastname":"Churchil","phone":"2021122333"}
+    ],
+    "girls":[
+        {"firstName":"Anna","lastname":"Calxtus","phone":"7259865321"},
+        {"firstName":"George","lastname":"Kristoferson","phone":"6017744991"}
+    ]
+}
