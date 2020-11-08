@@ -1,12 +1,13 @@
 const http = require('http');
-const port = 3000;
+const hostname = 'localhost';
+const port = process.env.PORT || 3000;
 
-var childs = require('./childs.json');
+var friends = require("./friends.json"); // Once for all times
 
-const server = http.createServer((req, res) =>{
-    res.statusCode = 200;
-    res.setHeader('Content-type','text/html');
-    res.write(
+const server = http.createServer((request, response) => {
+    response.statusCode = 200;
+    response.setHeader('Content-type', 'text/html');
+    response.write(
         '<!DOCTYPE html> \n' +
         '<html lang="en"> \n' +
         '        <head> \n' +
@@ -23,14 +24,17 @@ const server = http.createServer((req, res) =>{
         '       </head> \n' +
         '        <body> \n' +
         '               <div class="container" style="text-align: center"> \n' +
-        '               <h1>Example 2 of Node</h1><br> \n'
-    );
+        '               <h1>Another Example of Node</h1><br> \n'
 
-    res.write(
+    );
+    var currentDate = new Date();
+    response.write(
+        '               <p>Current time is: ' + currentDate + '</p>'
+    );
+    response.write(
         '               <table class="table table-bordered table-hover"> \n' +
         '                       <thead> \n' +
         '                               <tr> \n' +
-        '                                       <th scope="col">Gender</th> \n' +
         '                                       <th scope="col">First Name</th> \n' +
         '                                       <th scope="col">Last Name</th> \n' +
         '                                       <th scope="col">Phone</th> \n' +
@@ -38,26 +42,28 @@ const server = http.createServer((req, res) =>{
         '                       </thead> \n' +
         '                       <tbody> \n'
     );
-    for(var key in childs){
-        for(var i in childs[key]){
-            res.write(
+    for (var key in friends)
+        for (var f in friends[key])
+            response.write(
                 '                               <tr> \n' +
-                '                                       <td>' + key + '</td> \n' +
-                '                                       <td>' + childs[key][i]["firstName"] + '</td> \n' +
-                '                                       <td>' + childs[key][i]["lastname"] + '</td> \n' +
-                '                                       <td>' + childs[key][i]["phone"] + '</td> \n' +
+                '                                       <td>' + friends[key][f]["firstName"] + '</td> \n' +
+                '                                       <td>' + friends[key][f]["lastName"] + '</td> \n' +
+                '                                       <td>' + friends[key][f]["phone"] + '</td> \n' +
+                '                                       <td>' + friends[key][f]["gender"] + '</td> \n' +
                 '                               </tr> \n'
             );
-        }
-    };
-    res.write(
+
+    response.write(
         '                       </tbody> \n' +
-        '               </table> \n' +
+        '               </table> \n'
+    );
+    response.write(
         '       </body> \n' +
         '</html> \n'
     );
-    res.end();
+    response.end();
 });
-server.listen(port, () =>{
-    console.log(`listening at local ${port}`);
+
+server.listen(port, hostname, () => {
+    console.log(`Server running at http://${hostname}:${port}/`);
 });
